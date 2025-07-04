@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Poppins', Arial, sans-serif;
+            min-height: 100vh;
+        }
+        .card {
+            box-shadow: 0 8px 32px rgba(25,135,84,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+            border-radius: 18px;
+            border: none;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(2px);
+            animation: fadeInUp 1s;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .navbar-brand { font-weight: bold; letter-spacing: 1px; }
+        .footer {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            padding: 24px 0 12px 0;
+            margin-top: 40px;
+        }
+        .footer a { color: #fff; margin: 0 8px; }
+        .footer .fa-brands { font-size: 1.3rem; margin: 0 6px; }
+        .result-icon {
+            animation: bounce 1.2s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-12px); }
+        }
+        .alert-success {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            border: none;
+        }
+        .confetti {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti Canvas -->
+    <canvas class="confetti" id="confetti-canvas"></canvas>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);">
+      <div class="container">
+        <a class="navbar-brand" href="/">CareerGuide <i class="fas fa-graduation-cap"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/results">Results</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 90vh;">
+      <div class="card p-5 w-100 text-center position-relative" style="max-width: 500px;">
+        <div class="mb-4">
+          <i class="fas fa-trophy fa-3x text-success result-icon"></i>
+        </div>
+        <h2 class="mb-3">Your Career Suggestion</h2>
+        {% if suggestion %}
+          <div class="alert alert-success" role="alert">
+            <h3>{{ suggestion }}</h3>
+          </div>
+        {% else %}
+          <div class="alert alert-warning" role="alert">
+            <h3>No suggestion available.</h3>
+          </div>
+        {% endif %}
+        <a href="/" class="btn btn-outline-success mt-4"><i class="fas fa-home"></i> Back to Home</a>
+      </div>
+    </div>
+    <footer class="footer text-center mt-5">
+      <div class="container">
+        <span>CareerGuide &copy; 2025. Empowering your future. &nbsp;|&nbsp; <a href="/about" class="text-light">About</a></span>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Simple confetti animation
+    function randomColor() {
+      var colors = ["#43e97b", "#38f9d7", "#f9ca24", "#e17055", "#6c5ce7", "#00b894", "#fd79a8"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    function confettiPiece(ctx, width, height) {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height - height;
+      this.r = Math.random() * 6 + 4;
+      this.d = Math.random() * 50 + 50;
+      this.color = randomColor();
+      this.tilt = Math.floor(Math.random() * 10) - 10;
+      this.tiltAngleIncremental = (Math.random() * 0.07) + .05;
+      this.tiltAngle = 0;
+      this.draw = function() {
+        ctx.beginPath();
+        ctx.lineWidth = this.r;
+        ctx.strokeStyle = this.color;
+        ctx.moveTo(this.x + this.tilt + (this.r / 3), this.y);
+        ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.d / 5);
+        ctx.stroke();
+      };
+    }
+    function startConfetti() {
+      var canvas = document.getElementById('confetti-canvas');
+      var ctx = canvas.getContext('2d');
+      var W = window.innerWidth;
+      var H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+      var mp = 120;
+      var pieces = [];
+      for (var i = 0; i < mp; i++) {
+        pieces.push(new confettiPiece(ctx, W, H));
+      }
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < mp; i++) {
+          pieces[i].draw();
+        }
+        update();
+      }
+      function update() {
+        for (var i = 0; i < mp; i++) {
+          pieces[i].y += (Math.cos(pieces[i].d) + 3 + pieces[i].r / 2) / 2;
+          pieces[i].x += Math.sin(0.01);
+          pieces[i].tiltAngle += pieces[i].tiltAngleIncremental;
+          pieces[i].tilt = Math.sin(pieces[i].tiltAngle - (i % 3)) * 15;
+          if (pieces[i].y > H) {
+            pieces[i].x = Math.random() * W;
+            pieces[i].y = -10;
+          }
+        }
+      }
+      setInterval(draw, 20);
+    }
+    window.onload = function() {
+      startConfetti();
+    };
+    </script>
+</body>
+</html> 

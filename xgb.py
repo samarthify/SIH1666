@@ -4,6 +4,7 @@ from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split, GridSearchCV
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, classification_report
+import joblib
 
 # Load the dataset
 df = pd.read_csv('student_career_guidance_randomized.csv')
@@ -65,6 +66,12 @@ print(f"Best Cross-Validation Score: {best_score}")
 # Train the XGBoost model with the best parameters
 best_xgb = XGBClassifier(**best_params, random_state=42)
 best_xgb.fit(X_train, y_train)
+
+# Save the trained model and preprocessors
+joblib.dump(best_xgb, 'xgb_model.pkl')
+joblib.dump(encoder, 'encoder.pkl')
+joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(label_encoder, 'label_encoder.pkl')
 
 # Predict on the test set
 y_pred = best_xgb.predict(X_test)

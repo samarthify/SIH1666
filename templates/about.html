@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | CareerGuide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Poppins', Arial, sans-serif;
+            min-height: 100vh;
+        }
+        .card {
+            box-shadow: 0 8px 32px rgba(25,135,84,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+            border-radius: 18px;
+            border: none;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(2px);
+            animation: fadeInUp 1s;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .navbar-brand { font-weight: bold; letter-spacing: 1px; }
+        .footer {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            padding: 24px 0 12px 0;
+            margin-top: 40px;
+        }
+        .footer a { color: #fff; margin: 0 8px; }
+        .footer .fa-brands { font-size: 1.3rem; margin: 0 6px; }
+        .about-icon {
+            color: #198754;
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .about-title {
+            font-weight: 600;
+            color: #198754;
+            margin-bottom: 12px;
+        }
+        .about-section {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);">
+      <div class="container">
+        <a class="navbar-brand" href="/">CareerGuide <i class="fas fa-graduation-cap"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/results">Results</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/about">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+      <div class="card p-5 w-100" style="max-width: 700px;">
+        <div class="text-center mb-4">
+          <i class="fas fa-lightbulb about-icon"></i>
+          <div class="about-title">About CareerGuide</div>
+        </div>
+        <div class="about-section">
+          <h5>What is CareerGuide?</h5>
+          <p>CareerGuide is an intelligent, user-friendly platform designed to help students discover their ideal career paths. By leveraging advanced machine learning models and a rich dataset, CareerGuide provides personalized career suggestions based on your interests, strengths, and academic performance.</p>
+        </div>
+        <div class="about-section">
+          <h5>Our Mission</h5>
+          <p>We aim to empower students and young professionals to make informed decisions about their future. Our platform bridges the gap between aspirations and opportunities, making career planning accessible and insightful for everyone.</p>
+        </div>
+        <div class="about-section">
+          <h5>How it Works</h5>
+          <ul>
+            <li>Fill out a simple form with your interests, strengths, and academic details.</li>
+            <li>Our ML model analyzes your input and suggests the most suitable career path for you.</li>
+            <li>Get instant, actionable feedback and explore your options!</li>
+          </ul>
+        </div>
+        <div class="about-section">
+          <h5>Meet the Team</h5>
+          <p>This project was created by a passionate team of students and developers for the Smart India Hackathon 2025. We believe in the power of technology to transform lives and are committed to making career guidance smarter and more accessible.</p>
+        </div>
+        <div class="text-center mt-4">
+          <a href="/" class="btn btn-success"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+      </div>
+    </div>
+    <footer class="footer text-center mt-5">
+      <div class="container">
+        <span>CareerGuide &copy; 2025. Empowering your future. &nbsp;|&nbsp; <a href="/about" class="text-light">About</a></span>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
